@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Para a mulher da minha vida ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
+
+<style>
+
+#estrelas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+pointer-events:none;
+}
+
+body{
+margin:0;
+background:black;
+color:white;
+font-family:'Playfair Display',serif;
+overflow:hidden;
+}
+
+/* INTRO */
+
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+cursor:pointer;
+}
+
+#fraseTopo{
+font-family:'Great Vibes',cursive;
+font-size:60px;
+color:#ff4d6d;
+margin-bottom:40px;
+text-shadow:0 0 20px red;
+}
+
+/* ENVELOPE */
+
+.envelope{
+width:280px;
+height:180px;
+background:linear-gradient(145deg,#8b0000,#b30000);
+position:relative;
+border-radius:8px;
+box-shadow:0 15px 40px rgba(0,0,0,0.9), inset 0 0 20px rgba(0,0,0,0.4);
+perspective:800px;
+}
+
+.envelope-top{
+position:absolute;
+top:0;
+left:0;
+border-left:140px solid transparent;
+border-right:140px solid transparent;
+border-top:100px solid #b30000;
+transform-origin:top;
+transition:transform 1s;
+}
+
+.envelope.open .envelope-top{
+transform:rotateX(180deg);
+}
+
+/* CARTA */
+
+#cartaCompleta{
+display:none;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) rotateY(90deg);
+background:linear-gradient(#f5e6b0,#e8d39a),
+url("https://www.transparenttextures.com/patterns/paper.png");
+background-blend-mode:multiply;
+color:#111;
+padding:40px;
+border-radius:20px;
+width:90%;
+max-width:720px;
+height:85vh;
+overflow:auto;
+scrollbar-width:none;
+box-shadow:0 0 40px rgba(255,0,0,0.4),0 30px 60px rgba(0,0,0,0.9);
+transition:transform 1.2s;
+}
+
+#cartaCompleta::-webkit-scrollbar{
+display:none;
+}
+
+#cartaCompleta.abrir{
+transform:translate(-50%,-50%) rotateY(0deg);
+}
+
+.foto{
+width:75%;
+max-width:380px;
+display:block;
+margin:auto;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+/* CONTADOR */
+
+.contador{
+display:flex;
+justify-content:center;
+gap:20px;
+margin-bottom:30px;
+}
+
+.tempo{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.3);
+padding:18px 26px;
+border-radius:16px;
+text-align:center;
+color:black;
+}
+
+.numero{
+font-size:38px;
+font-weight:bold;
+color:#ff2b2b;
+}
+
+/* TEXTO */
+
+.texto{
+font-family:'Great Vibes',cursive;
+font-size:34px;
+line-height:1.8;
+text-align:center;
+white-space:pre-line;
+}
+
+/* BOTÕES */
+
+.botao{
+margin:30px auto;
+padding:15px 30px;
+font-size:18px;
+background:#ff4d6d;
+color:white;
+border:none;
+border-radius:30px;
+cursor:pointer;
+display:none;
+}
+
+/* QUADROS */
+
+#quadroFinal,#quadroPoema{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999;
+}
+
+.quadroMensagem{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(15px);
+border:2px solid rgba(255,255,255,0.3);
+padding:40px;
+border-radius:20px;
+text-align:center;
+font-family:'Great Vibes',cursive;
+font-size:42px;
+color:white;
+}
+
+.poemaBox{
+max-width:700px;
+max-height:80vh;
+overflow:auto;
+scrollbar-width:none;
+padding:40px;
+font-family:'Great Vibes',cursive;
+font-size:30px;
+text-align:center;
+color:#ff4d4d;
+}
+
+.poemaBox::-webkit-scrollbar{
+display:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<canvas id="estrelas"></canvas>
+
+<div id="intro">
+
+<h1 id="fraseTopo">Para a mulher da minha vida</h1>
+
+<div class="envelope" id="envelope">
+<div class="envelope-top"></div>
+</div>
+
+<p>Toque para abrir ❤️</p>
+
+</div>
+
+<div id="cartaCompleta">
+
+<h2 style="text-align:center;font-family:'Great Vibes';color:red;font-size:50px;">
+Eu te amo ❤️
+</h2>
+
+<img src="foto.jpg" class="foto">
+
+<div class="contador">
+<div class="tempo"><div id="dias" class="numero">0</div>Dias</div>
+<div class="tempo"><div id="horas" class="numero">0</div>Horas</div>
+<div class="tempo"><div id="minutos" class="numero">0</div>Min</div>
+<div class="tempo"><div id="segundos" class="numero">0</div>Seg</div>
+</div>
+
+<p id="texto" class="texto"></p>
+
+<button id="botaoAmor" class="botao">Clique aqui ❤️</button> <button id="botaoPoema" class="botao">Ler poema 💕</button>
+
+</div>
+
+<div id="quadroFinal">
+<div class="quadroMensagem">
+Obrigado por tudo meu bem,<br>
+eu te amo mais que tudo nesse mundo ❤️
+</div>
+<button onclick="document.getElementById('quadroFinal').style.display='none'">Fechar</button>
+</div>
+
+<div id="quadroPoema">
+<div class="poemaBox">
+
+Pra você, meu amor 💕
+
+<br><br>
+
+O amor, contigo, é mais que o sentir,
+É cuidar, é se doar, é florescer,
+Na tua luz, renasci, quis ser melhor,
+Versão que em mim não sabia existir.
+
+<br><br>
+
+Antes, minha vida era um breu, sem cor,
+Em turbilhões de dias sem sentido,
+Mas, qual milagre, o destino interveio,
+Trouxe teu ser, meu doce e novo amor.
+
+<br><br>
+
+Loucura que num jogo te encontrei,
+Fugindo do caos, da dor que me afligia,
+E ali, sem saber, minha vida renascia,
+No teu olhar, o mundo eu desvendei.
+
+<br><br>
+
+<button onclick="document.getElementById('quadroPoema').style.display='none'">Fechar</button>
+
+</div>
+</div>
+
+<audio id="musica" loop>
+<source src="turning-page.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* CONTADOR */
+
+const inicio = new Date("2025-11-07T00:00:00");
+
+function atualizarContador(){
+const agora = new Date();
+const diff = agora - inicio;
+
+document.getElementById("dias").innerText = Math.floor(diff/86400000);
+document.getElementById("horas").innerText = Math.floor(diff/3600000)%24;
+document.getElementById("minutos").innerText = Math.floor(diff/60000)%60;
+document.getElementById("segundos").innerText = Math.floor(diff/1000)%60;
+}
+
+atualizarContador();
+setInterval(atualizarContador,1000);
+
+/* TEXTO COMPLETO */
+
+const textoCarta = `Amor, contigo eu aprendi que amar é muito mais do que sentir. Amar é cuidar, é se preocupar, é estar presente e querer ver o outro bem todos os dias. Desde que você entrou na minha vida, eu comecei a querer ser alguém melhor, porque você despertou em mim uma versão que eu nem sabia que existia.
+
+Antes de te conhecer, minha vida era um inferno… e você sabe disso. Eu vivia no meio de problemas, discussões e dias que pareciam não ter sentido nenhum. Às vezes parecia que nada ia melhorar. Mas mesmo naquele momento tão difícil, a vida resolveu me surpreender da forma mais inesperada possível.
+
+Até hoje eu paro para pensar no quanto isso parece loucura… conhecer a pessoa que hoje é mais importante que a minha própria vida dentro de um jogo que eu mal jogava. Eu só tinha entrado naquele jogo para distrair a cabeça, porque eu estava cansado de tudo que estava acontecendo em casa. Eu só queria fugir um pouco da realidade.
+
+E sem saber… naquele mesmo dia eu encontrei você.
+E foi ali que a minha vida começou a mudar.
+
+Cada conversa nossa, cada risada, cada momento que a gente viveu juntos foi construindo algo que hoje é a coisa mais preciosa que eu tenho. Eu lembro do começo, das minhas ideias horríveis só para puxar assunto e tentar fazer a conversa continuar… e mesmo assim você ficava comigo E eu nem imaginava que aquelas conversas simples iam se transformar na história mais importante da minha vida.
+
+Todas essas lembranças são tesouros para mim. Momentos que eu guardo no coração e que eu sei que nunca vou esquecer enquanto eu viver.
+
+Meu único arrependimento de verdade é não ter te conhecido antes… porque se eu pudesse voltar no tempo, eu teria te encontrado muito antes, só para poder ter mais tempo ao seu lado.
+
+Porque quando eu estou com você, amor, parece que o mundo inteiro para. Nada mais importa naquele momento. Na minha cabeça só passa uma coisa, que eu sou o cara mais sortudo do mundo por ter uma pessoa tão incrível, tão companheira e tão especial como você na minha vida.
+
+Você não mudou só meus dias… você mudou a minha vida inteira. Você apareceu quando eu estava no meu pior momento, quando tudo parecia escuro, e conseguiu trazer luz para tudo. Você virou minha paz quando eu só conhecia o caos. Virou meu abrigo quando eu me sentia perdido.
+
+E eu quero que você saiba de uma coisa que vem do fundo do meu coração, Eu prometo cuidar de você, te respeitar, te apoiar e estar ao seu lado em todos os momentos. Nos dias bons, nos dias difíceis, nos momentos de alegria e até quando tudo parecer complicado.
+
+Eu quero continuar criando memórias com você, continuar rindo das nossas próprias besteiras e continuar vivendo essa história que começou de um jeito tão improvável.
+
+Porque se tem uma coisa que eu tenho certeza nessa vida… é que eu quero você nela. Hoje, amanhã e em todos os dias que ainda vão existir para mim.
+
+Eu te amo mais do que qualquer palavra no mundo conseguiria explicar.
+
+E se algum dia você se perguntar o quanto é importante pra mim, lembra de uma coisa: você entrou na minha vida no momento em que eu mais precisava de alguém, mesmo sem saber. Você transformou dias que eram pesados em momentos que hoje são as melhores lembranças da minha vida.
+
+Se um dia o mundo inteiro estivesse contra mim, mas eu ainda tivesse você do meu lado, eu ainda me sentiria a pessoa mais sortuda do mundo.
+
+Porque a verdade é simples…
+
+Se eu tivesse que viver tudo de novo, todas as dores, todos os problemas e todos os caminhos difíceis que passei, só para chegar até o momento em que eu te conheci…
+
+Eu viveria tudo outra vez.
+
+Sem mudar absolutamente nada.
+
+Só para poder encontrar você de novo. ❤️`;
+
+
+let i=0
+const musica=document.getElementById("musica")
+
+function escrever(){
+
+if(i===0) musica.play()
+
+if(i<textoCarta.length){
+document.getElementById("texto").innerHTML+=textoCarta.charAt(i)
+i++
+setTimeout(escrever,25)
+}else{
+document.getElementById("botaoAmor").style.display="block"
+document.getElementById("botaoPoema").style.display="block"
+}
+
+}
+
+document.getElementById("intro").onclick=function(){
+
+document.getElementById("envelope").classList.add("open")
+
+setTimeout(()=>{
+document.getElementById("intro").style.display="none"
+
+const carta=document.getElementById("cartaCompleta")
+carta.style.display="block"
+
+setTimeout(()=>{
+carta.classList.add("abrir")
+escrever()
+},200)
+
+},900)
+
+}
+
+document.getElementById("botaoPoema").onclick=function(){
+document.getElementById("quadroPoema").style.display="flex"
+}
+
+document.getElementById("botaoAmor").onclick=function(){
+document.getElementById("quadroFinal").style.display="flex"
+}
+
+/* ESTRELAS */
+
+const canvas=document.getElementById("estrelas")
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let estrelas=[]
+
+for(let i=0;i<120;i++){
+estrelas.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+alpha:Math.random()
+})
+}
+
+function animar(){
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+for(let e of estrelas){
+e.alpha+=(Math.random()-0.5)*0.1
+if(e.alpha<0)e.alpha=0
+if(e.alpha>1)e.alpha=1
+
+ctx.fillStyle="rgba(255,0,0,"+e.alpha+")"
+ctx.beginPath()
+ctx.arc(e.x,e.y,e.r,0,Math.PI*2)
+ctx.fill()
+}
+
+requestAnimationFrame(animar)
+}
+
+animar()
+
+</script>
+
+</body>
+</html>
